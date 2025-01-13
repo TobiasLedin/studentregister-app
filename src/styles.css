@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --egg: #F4EDD3;
+    --light: #A5BFCC;
+    --darker: #7E99A3;
+    --dark: #4C585B;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: whitesmoke;
+}
+
+.button {
+    box-shadow: inset 0 1px 0 0 #ffffff;
+    background: var(--egg) linear-gradient(to bottom, var(--egg) 15%, #f6f6f6 100%);
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+    color: var(--dark);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 3px 6px;
+    margin: 2px;
+    text-decoration: none;
+    outline: 0;
+    text-align:center;
+}
+
+.activebutton {
+    box-shadow: inset 0 0 0 1px var(--light);
+    border: 1px solid var(--darker);
+}

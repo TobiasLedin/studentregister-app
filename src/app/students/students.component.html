@@ -1,0 +1,39 @@
+@if (!dataLoaded) {
+
+<div>
+    <span class="spinner"></span>
+</div>
+
+
+}
+@else {
+
+<div>
+    <button class="button">New</button>
+    <button class="button" (click)="getAllStudents()">Refresh</button>
+</div>
+<div class="overflow">
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Date of Birth</th>
+            <th>Email</th>
+        </thead>
+        <tbody>
+
+            @for (student of studentList; track $index) {
+            <tr>
+                <td>{{ student.studentId }}</td>
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.dateOfBirth }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+}

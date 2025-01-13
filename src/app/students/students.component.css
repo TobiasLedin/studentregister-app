@@ -1,0 +1,53 @@
+table {
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+    font-weight: 600;
+    font-family: sans-serif;
+    width: auto;
+}
+
+table th {
+    border: 1px solid var(--darker);
+    background-color: var(--light);
+}
+
+table th, table td {
+    padding: 5px;
+}
+
+table td {
+    font-weight: 500;
+    font-family: sans-serif;
+}
+
+table tr:nth-child(even) {
+    background-color: rgb(231, 231, 231);
+}
+
+table tr:hover {
+    background-color: rgb(212, 212, 212);
+}
+
+.overflow {
+    overflow: auto;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid var(--darker);
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
