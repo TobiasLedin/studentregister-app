@@ -9,8 +9,8 @@ export class StudentService {
 
   constructor(private http: HttpClient) { }
 
-  // private apiUrl = "https://studentregisterapi-app-202501081.purpleforest-03aa017a.northeurope.azurecontainerapps.io/api/students";
-  private apiUrl = "https://localhost:7094/api/students";
+  private apiUrl = "https://studentregisterapi-app-202501081.purpleforest-03aa017a.northeurope.azurecontainerapps.io/api/students";
+  //private apiUrl = "https://localhost:7094/api/students";
 
   getStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(this.apiUrl);
