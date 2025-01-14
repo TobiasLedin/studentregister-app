@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '18.x'
           cache: 'npm'
       
       - name: Install dependencies
@@ -55,6 +55,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "."
-          output_location: "dist/studentregister-app"
+          output_location: "dist/studentregister-app/browser"
           #app_artifact_location: "dist/studentregister-app"
           skip_app_build: true  # Skip the built-in build process since we're building manually
