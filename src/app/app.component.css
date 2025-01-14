@@ -34,6 +34,7 @@
 
 .grid-container > div.content {
     grid-area: content;
+    display: flex;
     box-sizing: border-box;
     justify-content: center;
     width: 90%;
