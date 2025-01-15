@@ -1,8 +1,9 @@
 table {
     /* border: 1px solid black; */
     border-collapse: collapse;
-    font-weight: 600;
-    font-family: sans-serif;
+    font-weight: 500;
+    font-size: medium;
+    font-family: Helvetica, sans-serif;
     width: auto;
 }
 
@@ -17,7 +18,12 @@ table th, table td {
 
 table td {
     font-weight: 500;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
+}
+
+table tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 table tr:nth-child(even) {
@@ -26,6 +32,10 @@ table tr:nth-child(even) {
 
 table tr:hover {
     background-color: rgb(212, 212, 212);
+}
+
+table tr.selected {
+    background-color: rgb(216, 185, 185);
 }
 
 .overflow {

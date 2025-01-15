@@ -1,0 +1,64 @@
+<div class="modal-overlay">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>{{ title }}</h2>
+
+      @if (purpose === 'delete') {
+        <div>
+          <p>You are about to delete the selected student. <br/>
+            Please confirm.</p>
+          <p>{{ studentData?.firstName }} {{ studentData?.lastName }}</p>
+        </div>
+      }
+
+      @if (purpose === 'new' || purpose === 'edit') {
+        <form #studentForm="ngForm" (ngSubmit)="confirmAction()">
+            <div>
+                <label for="firstName">First Name:</label>
+                <input 
+                    type="text" 
+                    id="firstName"
+                    name="firstName"
+                    [(ngModel)]="studentData!.firstName" 
+                    required />
+
+                <label for="lastName">Last Name:</label>
+                <input 
+                    type="text" 
+                    id="lastName"
+                    name="lastName"
+                    [(ngModel)]="studentData!.lastName" 
+                    required />
+
+                <label for="dateOfBirth">Date of Birth:</label>
+                <input 
+                    type="date" 
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    [ngModel]="studentData!.dateOfBirth | date:'yyyy-MM-dd'"
+                    (ngModelChange)="studentData!.dateOfBirth = $event"
+                    required />
+
+                <label for="email">Email:</label>
+                <input 
+                    type="email" 
+                    id="email"
+                    name="email"
+                    [(ngModel)]="studentData!.email" 
+                    required 
+                    email />
+            </div>
+            <div>
+                <button type="submit" [disabled]="!studentForm.valid">Confirm</button>
+                <button type="button" (click)="closeModal()">Close</button>
+            </div>
+        </form>
+    }
+
+    @else {
+        <div>
+            <button (click)="confirmAction()">Confirm</button>
+            <button (click)="closeModal()">Close</button>
+        </div>
+    }
+</div>
+</div>
