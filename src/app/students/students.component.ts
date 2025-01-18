@@ -111,30 +111,39 @@ export class StudentsComponent implements OnInit {
   }
 
   onActionConfirmed(student: Student) {
-    if (this.modalPurpose === 'new') {
+
       // Call student service to create new student
-      this.studentService.createStudent(student).subscribe(() => {
-        this.getAllStudents();
-        this.hideModal();
-      });
-    } else if (this.modalPurpose === 'edit') {
+    if (this.modalPurpose === 'new') {
+      this.isRetrievalInProgress = true;
+      this.studentService.createStudent(student)
+        .subscribe(() => {
+          this.getAllStudents()
+        })
+    }
+
       // Call student service to edit student
-      this.studentService.editStudent(student.studentId, student).subscribe(() => {
-        this.getAllStudents();
-        this.selectedStudent = undefined;
-        this.selectedStudentId = undefined;
-        this.hideModal();
-      });
-    } else if (this.modalPurpose === 'delete') {
+    else if (this.modalPurpose === 'edit') {
+      this.isRetrievalInProgress = true;
+      this.studentService.editStudent(student.studentId, student)
+        .subscribe(() => {
+          this.getAllStudents();
+          this.selectedStudent = undefined;
+          this.selectedStudentId = undefined;
+        })
+    }
+
       // Call student service to delete student
-      this.studentService.deleteStudent(student.studentId).subscribe(() => {
-        this.getAllStudents();
-        this.selectedStudent = undefined;
-        this.selectedStudentId = undefined;
-        this.hideModal();
-      });
+    else if (this.modalPurpose === 'delete') {
+      this.isRetrievalInProgress = true;
+      this.studentService.deleteStudent(student.studentId)
+        .subscribe(() => {
+          this.getAllStudents();
+          this.selectedStudent = undefined;
+          this.selectedStudentId = undefined;
+        })
     }
   }
+
 
   selectStudent(student: Student): void {
     if (this.selectedStudentId === student.studentId) {

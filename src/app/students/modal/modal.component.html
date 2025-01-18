@@ -6,7 +6,11 @@
         <div>
           <p>You are about to delete the selected student. <br/>
             Please confirm.</p>
-        <h3>{{ studentData?.firstName }} {{ studentData?.lastName }}</h3>
+            <h3>{{ studentData?.firstName }} {{ studentData?.lastName }}</h3>
+        </div>
+        <div>
+            <button (click)="confirmAction()">Confirm</button>
+            <button (click)="closeModal()">Close</button>
         </div>
       }
 
@@ -58,11 +62,11 @@
         </form>
     }
 
-    @else {
+    <!-- @else {
         <div>
             <button (click)="confirmAction()">Confirm</button>
             <button (click)="closeModal()">Close</button>
         </div>
-    }
+    } -->
 </div>
 </div>
