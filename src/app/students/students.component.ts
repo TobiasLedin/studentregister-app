@@ -29,7 +29,7 @@ export class StudentsComponent implements OnInit {
   modalTitle: string = '';
   modalPurpose: 'new' | 'edit' | 'delete' = 'new';
   selectedStudent?: Student;
-  selectedStudentId?: number;
+  // selectedStudentId?: number;
 
 
   ngOnInit(): void {
@@ -39,6 +39,7 @@ export class StudentsComponent implements OnInit {
 
   getAllStudents() {
     this.isRetrievalInProgress = true;
+    this.selectedStudent = undefined;
     this.hasRetrieveErrorOccurred = false;
     this.studentService.getAllStudents()
       .pipe(
@@ -128,7 +129,6 @@ export class StudentsComponent implements OnInit {
         .subscribe(() => {
           this.getAllStudents();
           this.selectedStudent = undefined;
-          this.selectedStudentId = undefined;
         })
     }
 
@@ -139,19 +139,16 @@ export class StudentsComponent implements OnInit {
         .subscribe(() => {
           this.getAllStudents();
           this.selectedStudent = undefined;
-          this.selectedStudentId = undefined;
         })
     }
   }
 
 
   selectStudent(student: Student): void {
-    if (this.selectedStudentId === student.studentId) {
-      this.selectedStudentId = undefined;
+    if (this.selectedStudent?.studentId === student.studentId) {
       this.selectedStudent = undefined;
     }
     else {
-      this.selectedStudentId = student.studentId;
       this.selectedStudent = student;
     }
   }

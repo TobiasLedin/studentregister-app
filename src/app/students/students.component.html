@@ -43,7 +43,7 @@
         <tbody>
 
             @for (student of studentList; track $index) {
-            <tr [class.selected]="selectedStudentId === student.studentId" (click)="selectStudent(student)">
+            <tr [class.selected]="selectedStudent === student" (click)="selectStudent(student)">
                 <td>{{ student.studentId }}</td>
                 <td>{{ student.firstName }}</td>
                 <td>{{ student.lastName }}</td>
