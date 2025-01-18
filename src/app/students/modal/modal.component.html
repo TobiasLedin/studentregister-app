@@ -6,7 +6,7 @@
         <div>
           <p>You are about to delete the selected student. <br/>
             Please confirm.</p>
-          <p>{{ studentData?.firstName }} {{ studentData?.lastName }}</p>
+        <h3>{{ studentData?.firstName }} {{ studentData?.lastName }}</h3>
         </div>
       }
 
@@ -20,6 +20,7 @@
                     name="firstName"
                     [(ngModel)]="studentData!.firstName" 
                     required />
+                    <br>
 
                 <label for="lastName">Last Name:</label>
                 <input 
@@ -28,6 +29,7 @@
                     name="lastName"
                     [(ngModel)]="studentData!.lastName" 
                     required />
+                    <br>
 
                 <label for="dateOfBirth">Date of Birth:</label>
                 <input 
@@ -37,6 +39,7 @@
                     [ngModel]="studentData!.dateOfBirth | date:'yyyy-MM-dd'"
                     (ngModelChange)="studentData!.dateOfBirth = $event"
                     required />
+                    <br>
 
                 <label for="email">Email:</label>
                 <input 
@@ -46,6 +49,7 @@
                     [(ngModel)]="studentData!.email" 
                     required 
                     email />
+                    <br>
             </div>
             <div>
                 <button type="submit" [disabled]="!studentForm.valid">Confirm</button>

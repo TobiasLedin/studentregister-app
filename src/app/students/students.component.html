@@ -1,11 +1,27 @@
-@if (!dataLoaded) {
+@if (isRetrievalInProgress) {
+
+<div class="flex-center">
+    <span class="spinner"></span>
+</div>
+<div>
+    <p [class.hidden]="retryCount == 0">Retry attempt: {{ retryCount }}</p>
+</div>
+
+}
+@else if (isRetrievalInProgress == false && hasRetrieveErrorOccurred == true) {
 
 <div>
-    <span class="spinner"></span>
+    <p>Unfortunately we are not able to load the requested data. <br> Please try again shortly!</p>
 </div>
 
 }
 @else {
+
+    @if (isModalVisible) {
+    
+    <app-modal [title]="modalTitle" [purpose]="modalPurpose" [studentData]="selectedStudent" (close)="hideModal()"
+        (actionConfirmed)="onActionConfirmed($event)" />
+    }
 
 <div>
     <button class="button" (click)="showModal('new')">New</button>
@@ -13,24 +29,16 @@
     <button class="button" [disabled]="!selectedStudent" (click)="showModal('delete', selectedStudent)">Delete</button>
     <button class="button" (click)="getAllStudents()">Refresh</button>
 </div>
-<div class="overflow">
-
-    @if (isModalVisible){
-        <app-modal 
-        [title]="modalTitle"
-        [purpose]="modalPurpose"
-        [studentData]="selectedStudent"
-        (close)="hideModal()"
-        (actionConfirmed)="onActionConfirmed($event)" />
-    }
-
+<div>
     <table>
         <thead>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Date of Birth</th>
-            <th>Email</th>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+            </tr>
         </thead>
         <tbody>
 
@@ -47,5 +55,4 @@
         </tbody>
     </table>
 </div>
-
 }

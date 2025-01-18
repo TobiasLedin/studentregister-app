@@ -42,11 +42,17 @@ table tr.selected {
     overflow: auto;
 }
 
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .spinner {
     width: 48px;
     height: 48px;
     border-radius: 50%;
     display: inline-block;
+    align-self: center;
     border-top: 3px solid var(--darker);
     border-right: 3px solid transparent;
     box-sizing: border-box;
@@ -60,4 +66,7 @@ table tr.selected {
     100% {
         transform: rotate(360deg);
     }
+}
+.hidden {
+    visibility: hidden
 }
