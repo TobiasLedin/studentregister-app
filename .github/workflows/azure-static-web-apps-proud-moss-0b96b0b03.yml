@@ -26,7 +26,7 @@ jobs:
         run: npm ci
       
       - name: Build
-        run: npm run build
+        run: npm run build -- --configuration production
       
       - name: Debug directory contents
         run: |
@@ -57,4 +57,4 @@ jobs:
           app_location: "dist/studentregister-app/browser"
           output_location: "dist/studentregister-app/browser"
           app_artifact_location: "dist/studentregister-app/browser"
-          skip_app_build: true  # Skip the built-in build process since we're building manually
+          skip_app_build: true
