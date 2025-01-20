@@ -1,65 +1,67 @@
 @if (isRetrievalInProgress) {
 
-<div class="flex-center">
-    <div>
-        <span class="spinner"></span>
+    <div class="flex-center">
+        <div>
+            <span class="spinner"></span>
+        </div>
+        <div class="status-msg">
+            <span [class.hidden]="!isProgressMessageVisible">
+                Please be patient. Our Azure database tends to be a bit sleepy.
+            </span>
+        </div>
+        <div class="status-msg">
+            <span [class.hidden]="retryCount == 0">Retry attempt: {{ retryCount }} of {{ retryAttempts }}</span>
+        </div>
     </div>
-    <div class="status-msg">
-        <span [class.hidden]="!isProgressMessageVisible">
-            Please be patient. Our Azure database tends to be a bit sleepy.
-        </span>
-    </div>
-    <div class="status-msg">
-        <span [class.hidden]="retryCount == 0">Retry attempt: {{ retryCount }} of {{ retryAttempts }}</span>
-    </div>
-</div>
 
 }
-@else if (isRetrievalInProgress == false && hasRetrieveErrorOccurred == true) {
+@else if (!isRetrievalInProgress && hasRetrieveErrorOccurred) {
 
-<div>
-    <p>Unfortunately we are not able to load the requested data. <br> Please try again shortly!</p>
-</div>
+    <div class="flex-center">
+        <div class="status-msg">
+            <span>Unfortunately we are not able to load the requested data. Please try again shortly!</span>
+        </div>
+    </div>
 
 }
 @else {
 
-@if (isModalVisible) {
+    @if (isModalVisible) {
+        <app-modal [title]="modalTitle" [purpose]="modalPurpose" [studentData]="selectedStudent" (close)="hideModal()"
+            (actionConfirmed)="onActionConfirmed($event)" />
+    }
 
-<app-modal [title]="modalTitle" [purpose]="modalPurpose" [studentData]="selectedStudent" (close)="hideModal()"
-    (actionConfirmed)="onActionConfirmed($event)" />
-}
+    <div>
+        <button class="button" (click)="showModal('new')">New</button>
+        <button class="button" [disabled]="!selectedStudent" (click)="showModal('edit', selectedStudent)">Edit</button>
+        <button class="button" [disabled]="!selectedStudent" (click)="showModal('delete', selectedStudent)">Delete</button>
+        <button class="button" (click)="getAllStudents()">Refresh</button>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Date of Birth</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
 
-<div>
-    <button class="button" (click)="showModal('new')">New</button>
-    <button class="button" [disabled]="!selectedStudent" (click)="showModal('edit', selectedStudent)">Edit</button>
-    <button class="button" [disabled]="!selectedStudent" (click)="showModal('delete', selectedStudent)">Delete</button>
-    <button class="button" (click)="getAllStudents()">Refresh</button>
-</div>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Date of Birth</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
+                @for (student of studentList; track $index) {
+                    <tr [class.selected]="selectedStudent === student" (click)="selectStudent(student)">
+                        <td>{{ student.studentId }}</td>
+                        <td>{{ student.firstName }}</td>
+                        <td>{{ student.lastName }}</td>
+                        <td>{{ student.dateOfBirth }}</td>
+                        <td>{{ student.email }}</td>
+                    </tr>
+                }
 
-            @for (student of studentList; track $index) {
-            <tr [class.selected]="selectedStudent === student" (click)="selectStudent(student)">
-                <td>{{ student.studentId }}</td>
-                <td>{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.dateOfBirth }}</td>
-                <td>{{ student.email }}</td>
-            </tr>
-            }
-
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+    
 }
