@@ -21,6 +21,7 @@ export class StudentsComponent implements OnInit {
   isRetrievalInProgress: boolean = false;
   hasRetrieveErrorOccurred: boolean = false;
   isRetryActive: boolean = false;
+  isProgressMessageVisible: boolean = false;
   retryAttempts: number = 3;
   retryCount: number = 0;
 
@@ -29,7 +30,6 @@ export class StudentsComponent implements OnInit {
   modalTitle: string = '';
   modalPurpose: 'new' | 'edit' | 'delete' = 'new';
   selectedStudent?: Student;
-  // selectedStudentId?: number;
 
 
   ngOnInit(): void {
@@ -41,6 +41,7 @@ export class StudentsComponent implements OnInit {
     this.isRetrievalInProgress = true;
     this.selectedStudent = undefined;
     this.hasRetrieveErrorOccurred = false;
+    this.messageDelay();
     this.studentService.getAllStudents()
       .pipe(
         retry({
@@ -61,11 +62,13 @@ export class StudentsComponent implements OnInit {
           this.studentList = result;
           this.isRetrievalInProgress = false;
           this.retryCount = 0;
+          this.isProgressMessageVisible = false;
         },
         error: (error) => {
           this.retryCount = 0;
           this.hasRetrieveErrorOccurred = true;
           this.isRetrievalInProgress = false;
+          this.isProgressMessageVisible = false;
         }
       })
   }
@@ -143,7 +146,6 @@ export class StudentsComponent implements OnInit {
     }
   }
 
-
   selectStudent(student: Student): void {
     if (this.selectedStudent?.studentId === student.studentId) {
       this.selectedStudent = undefined;
@@ -151,6 +153,12 @@ export class StudentsComponent implements OnInit {
     else {
       this.selectedStudent = student;
     }
+  }
+
+  messageDelay() {
+    setTimeout(() => {
+      this.isProgressMessageVisible = true;
+    }, 2000);
   }
 
 }
