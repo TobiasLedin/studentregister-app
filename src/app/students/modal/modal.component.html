@@ -23,25 +23,79 @@
 
         <form #studentForm="ngForm" (ngSubmit)="confirmAction()">
             <div>
+                <!-- First name -->
                 <div class="input-box">
                     <label for="firstName">First Name</label><br>
-                    <input type="text" id="firstName" name="firstName" [(ngModel)]="studentData!.firstName" required />
+                    <input type="text" id="firstName" name="firstName" [(ngModel)]="studentData!.firstName"
+                        #firstName="ngModel" required minlength="2" maxlength="20" />
+
+                    @if (firstName.touched && firstName.invalid) {
+                    <div class="error-msg">
+                        @if (firstName.errors?.['required']) {
+                        <span>First name is required.</span>
+                        }
+                        @if (firstName.errors?.['minlength']) {
+                        <span>First name must be at least 2 characters long.</span>
+                        }
+                    </div>
+                    }
                 </div>
+
+                <!-- Last name -->
                 <div class="input-box">
                     <label for="lastName">Last Name</label><br>
-                    <input type="text" id="lastName" name="lastName" [(ngModel)]="studentData!.lastName" required />
+                    <input type="text" id="lastName" name="lastName" [(ngModel)]="studentData!.lastName"
+                        #lastName="ngModel" required required minlength="2" maxlength="20" />
+
+                    @if (lastName.touched && lastName.invalid) {
+                    <div class="error-msg">
+                        @if (lastName.errors?.['required']) {
+                        <span>Last name is required.</span>
+                        }
+                        @if (lastName.errors?.['minlength']) {
+                        <span>Last name must be at least 2 characters long.</span>
+                        }
+                    </div>
+                    }
                 </div>
+
+                <!-- Date of Birth -->
                 <div class="input-box">
                     <label for="dateOfBirth">Date of Birth</label><br>
                     <input type="date" id="dateOfBirth" name="dateOfBirth"
                         [ngModel]="studentData!.dateOfBirth | date:'yyyy-MM-dd'"
-                        (ngModelChange)="studentData!.dateOfBirth = $event" required />
+                        (ngModelChange)="studentData!.dateOfBirth = $event" #dateOfBirth="ngModel" [max]="dateToday"
+                        required />
+
+                    @if (dateOfBirth.invalid) {
+                    <div class="error-msg">
+                        @if (dateOfBirth.errors?.['required']) {
+                        <span>Date of birth is required.</span>
+                        }
+                    </div>
+                    }
                 </div>
+
+                <!-- Email -->
                 <div class="input-box">
                     <label for="email">Email</label><br>
-                    <input type="email" id="email" name="email" [(ngModel)]="studentData!.email" required email />
+                    <input type="email" id="email" name="email" [(ngModel)]="studentData!.email" #email="ngModel"
+                        required email />
+
+                    @if (email.touched && email.invalid) {
+                    <div class="error-msg">
+                        @if (email.errors?.['required']) {
+                        <span>Email is required.</span>
+                        }
+                        @if (email.errors?.['email']) {
+                        <span>Not a valid email address.</span>
+                        }
+                    </div>
+                    }
+
                 </div>
             </div>
+
             <div class="btn-container">
                 <button type="submit" [disabled]="!studentForm.valid">Save</button>
             </div>

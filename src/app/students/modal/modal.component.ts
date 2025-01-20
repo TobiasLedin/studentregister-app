@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Student } from '../../interfaces/student.interface';
 
@@ -14,11 +14,15 @@ export class ModalComponent {
   @Input() title: string = 'Modal title';
   @Input() purpose: 'new' | 'edit' | 'delete' = 'new';
   @Input() studentData?: Student;
-
   @Output() close = new EventEmitter<void>();
   @Output() actionConfirmed = new EventEmitter<any>();
-
   @ViewChild('studentForm') studentForm?: NgForm;
+
+  dateToday: string;
+
+  constructor() {
+    this.dateToday = new Date().toISOString().split('T')[0];
+  }
 
   closeModal(): void {
     this.close.emit();

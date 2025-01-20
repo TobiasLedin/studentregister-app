@@ -65,6 +65,15 @@ p {
   margin-top: 20px;
 }
 
-.btn-danger {
-  background: #df6954;
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+input.ng-valid.ng-touched {
+  border-color: green;
+}
+
+.error-msg {
+  color: red;
+  padding-top: 4px;
 }
