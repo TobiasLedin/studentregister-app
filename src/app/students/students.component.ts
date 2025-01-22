@@ -112,6 +112,7 @@ export class StudentsComponent implements OnInit {
 
   hideModal() {
     this.isModalVisible = false;
+    this.selectedStudent = undefined;
   }
 
   onActionConfirmed(student: Student) {
